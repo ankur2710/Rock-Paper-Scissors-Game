@@ -10,7 +10,6 @@ userWin = 0
 compWin = 0
 counter = 0
 turns = 5
-
 #----------------Image set----------------
 rHandPhoto = PhotoImage(file = 'rHand.png')
 pHandPhoto = PhotoImage(file = 'pHand.png')
@@ -27,12 +26,7 @@ lose = Image.open("RockPaperScissorsImages/YouLose.jpg")
 loseImage = ImageTk.PhotoImage(lose)
 tie = Image.open("RockPaperScissorsImages/YouTie.jpg")
 tieImage = ImageTk.PhotoImage(tie)
-
-
-
-
 #------------------------------------------
-
 rHandButton = ''
 pHandButton = ''
 sHandButton = ''
@@ -51,7 +45,6 @@ def changeDark():
 def exitall():
     boardb.quit()
     root.quit()
-
 def getLeaderboard():
     global boardb, board, light, dark
     boardb = Tk()
@@ -80,8 +73,7 @@ def getLeaderboard():
     played.grid(row=1, column=4, padx=2, pady=2)
     rate = Label(board, text="Winning Rate", width=15, bg='#ff1f60', fg='white', padx=5, pady=5)
     rate.grid(row=1, column=5, padx=2, pady=2)
-
-    for record in data:
+  for record in data:
         name = Label(board, text = record[0], width = 15, bg = '#3d7eac', fg = 'white', padx = 5, pady = 5)
         name.grid(row = rowno, column = 0, padx = 2, pady = 2)
         won = Label(board, text=record[1], width = 15, bg = '#b846ff', fg = 'white', padx = 5, pady = 5)
@@ -95,7 +87,6 @@ def getLeaderboard():
         rate = Label(board, text=record[5], width = 15, bg = '#ff5385', fg = 'white', padx = 5, pady = 5)
         rate.grid(row = rowno, column=5, padx = 2, pady = 2)
         rowno += 1
-
     conn.commit()
     conn.close()
     light = Button(boardb, text = "Light Theme", pady = 7, command = changeLight, bg = 'black', fg = 'white', width = 30)
@@ -104,10 +95,7 @@ def getLeaderboard():
     dark.grid(row=1, column=1, pady = (0, 20))
     exit = Button(boardb, text="Exit", pady=7, command=exitall, bg='red', fg='white', width=30)
     exit.grid(row=1, column=2, pady=(0, 20))
-
 getLeaderboard()
-
-
 def play():
     global rHandButton, pHandButton, sHandButton, userWin, compWin, Scoreboard, rockLabel, paperLabel, scissorLabel, buttonHolder
     rockLabel = Label(root, text = 'Rock', bg = '#238f02', fg = 'white', width = 35, padx = 10, pady =10)
@@ -131,11 +119,9 @@ def play():
     resetButton.pack(pady = 5)
     LeaderBoardBtn = Button(buttonHolder, text = 'Leader Board',fg = 'white', command=lambda: reset_frame(), bg = 'black', width = 30, pady = 10)
     LeaderBoardBtn.pack(pady = 5)
-
 def computerPick():
     choice = random.choice(['rock','paper','scissors'])
     return choice
-
 def youPick(yourChoice):
     global click, userWin, compWin, Scoreboard, counter, turns
     compPick = computerPick()
@@ -219,8 +205,7 @@ def youPick(yourChoice):
             paperLabel.configure(text='Paper')
             scissorLabel.configure(text='Scissors')
             click = True
-
-    Scoreboard = Label(root, text="SCORE \n\n    USER - " + str(userWin) + "\t\tCOMPUTER - " + str(compWin), bg='blue',
+  Scoreboard = Label(root, text="SCORE \n\n    USER - " + str(userWin) + "\t\tCOMPUTER - " + str(compWin), bg='blue',
                        fg='white', padx=10, pady=20)
     Scoreboard.config(font=("Times", 15))
     Scoreboard.grid(row=2, column=0, columnspan=2, sticky=W + E, padx=10, pady=10)
@@ -249,7 +234,6 @@ def youPick(yourChoice):
         rHandButton.configure(state = "disabled")
         pHandButton.configure(state="disabled")
         sHandButton.configure(state="disabled")
-
 def reset_frame():
     global click
     rHandButton.configure(image=rHandPhoto)
