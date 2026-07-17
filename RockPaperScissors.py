@@ -234,3 +234,14 @@ def youPick(yourChoice):
         rHandButton.configure(state = "disabled")
         pHandButton.configure(state="disabled")
         sHandButton.configure(state="disabled")
+def reset_frame():
+    global click
+    rHandButton.configure(image=rHandPhoto)
+    pHandButton.configure(image=pHandPhoto)
+    sHandButton.configure(image=sHandPhoto)
+    rockLabel.configure(text='Rock')
+    paperLabel.configure(text='Paper')
+    scissorLabel.configure(text='Scissor')
+    click = True
+play()
+root.mainloop()
