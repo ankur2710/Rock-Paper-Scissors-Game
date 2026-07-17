@@ -27,3 +27,72 @@ loseImage = ImageTk.PhotoImage(lose)
 tie = Image.open("RockPaperScissorsImages/YouTie.jpg")
 tieImage = ImageTk.PhotoImage(tie)
 #------------------------------------------
+rHandButton = ''
+pHandButton = ''
+sHandButton = ''
+def changeLight():
+    boardb.configure(bg='white')
+    board.configure(bg='white')
+    light.configure(bg='black', fg='white')
+    dark.configure(bg='black', fg='white')
+    return
+def changeDark():
+    boardb.configure(bg='black')
+    board.configure(bg='black')
+    light.configure(bg='white', fg='black')
+    dark.configure(bg='white', fg='black')
+    return
+def exitall():
+    boardb.quit()
+    root.quit()
+def getLeaderboard():
+    global boardb, board, light, dark
+    boardb = Tk()
+    boardb.title("Leader Board :)")
+    boardb.configure(bg = 'white')
+    board = Frame(boardb, bg  ='white', padx = 10, pady = 10)
+    board.grid(row = 0, column = 0, columnspan = 3)
+    conn = sqlite3.connect('LeaderBoard.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM LEADERBOARD")
+    data = c.fetchall()
+    rowno = 2
+    Heading = Label(board, text = "Leaderboard", bg = '#dd2c00', fg = 'white', width = 45, pady = 10, padx = 10)
+    Heading.config(font=("Times", 20, "bold"))
+    Heading.grid(row = 0, column = 0, columnspan = 6, padx = 5, pady  = 5)
+
+    name = Label(board, text="Name", width=15, bg='#0069b3', fg='white', padx=5, pady=5)
+    name.grid(row=1, column=0, padx=2, pady=2)
+    won = Label(board, text="Games Won", width=15, bg='#a617ff', fg='white', padx=5, pady=5)
+    won.grid(row=1, column=1, padx=2, pady=2)
+    lost = Label(board, text="Games Lost", width=15, bg='#e01717', fg='white', padx=5, pady=5)
+    lost.grid(row=1, column=2, padx=2, pady=2)
+    tied = Label(board, text="Games Tied", width=15, bg='#e77c00', fg='white', padx=5, pady=5)
+    tied.grid(row=1, column=3, padx=2, pady=2)
+    played = Label(board, text="Games Played", width=15, bg='#30b000', fg='white', padx=5, pady=5)
+    played.grid(row=1, column=4, padx=2, pady=2)
+    rate = Label(board, text="Winning Rate", width=15, bg='#ff1f60', fg='white', padx=5, pady=5)
+    rate.grid(row=1, column=5, padx=2, pady=2)
+  for record in data:
+        name = Label(board, text = record[0], width = 15, bg = '#3d7eac', fg = 'white', padx = 5, pady = 5)
+        name.grid(row = rowno, column = 0, padx = 2, pady = 2)
+        won = Label(board, text=record[1], width = 15, bg = '#b846ff', fg = 'white', padx = 5, pady = 5)
+        won.grid(row = rowno, column=1, padx = 2, pady = 2)
+        lost = Label(board, text=record[2], width = 15, bg = '#e33f3f', fg = 'white', padx = 5, pady = 5)
+        lost.grid(row = rowno, column=2, padx = 2, pady = 2)
+        tied = Label(board, text=record[3], width = 15, bg = '#e38d2a', fg = 'white', padx = 5, pady = 5)
+        tied.grid(row = rowno, column=3, padx = 2, pady = 2)
+        played = Label(board, text=record[4], width = 15, bg = '#62be40', fg = 'white', padx = 5, pady = 5)
+        played.grid(row = rowno, column=4, padx = 2, pady = 2)
+        rate = Label(board, text=record[5], width = 15, bg = '#ff5385', fg = 'white', padx = 5, pady = 5)
+        rate.grid(row = rowno, column=5, padx = 2, pady = 2)
+        rowno += 1
+    conn.commit()
+    conn.close()
+    light = Button(boardb, text = "Light Theme", pady = 7, command = changeLight, bg = 'black', fg = 'white', width = 30)
+    light.grid(row = 1, column = 0, pady = (0, 20))
+    dark = Button(boardb, text="Dark Theme", pady = 7, command = changeDark, bg = 'black', fg = 'white', width = 30)
+    dark.grid(row=1, column=1, pady = (0, 20))
+    exit = Button(boardb, text="Exit", pady=7, command=exitall, bg='red', fg='white', width=30)
+    exit.grid(row=1, column=2, pady=(0, 20))
+getLeaderboard()
