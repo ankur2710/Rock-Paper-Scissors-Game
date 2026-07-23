@@ -575,4 +575,9 @@ def signup():
     Signup.grid(row=6, column=0, columnspan=2, padx=10, pady=(15, 0))
     return
 
+# WELCOME LABEL
+WelcomeLabel = Label(root, text = "Welcome to the Game !!", pady = 20)
+WelcomeLabel.config(font=("Times", 20, "bold"))
+WelcomeLabel.grid(row=0, column=0, columnspan = 2)
+
 
