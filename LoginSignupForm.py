@@ -580,4 +580,14 @@ WelcomeLabel = Label(root, text = "Welcome to the Game !!", pady = 20)
 WelcomeLabel.config(font=("Times", 20, "bold"))
 WelcomeLabel.grid(row=0, column=0, columnspan = 2)
 
+# LOGIN BUTTON
+LoginBtn = Button(root, text = "LogIn", command = login, pady = 5, width=27, bg='#19a8f2', fg='white')
+LoginBtn.grid(row = 1, column = 0, padx = 1)
+
+# SIGN UP BUTTON
+SignupBtn = Button(root, text = "SignUp", command = signup, pady = 5, width=27, bg='#19a8f2', fg='white')
+SignupBtn.grid(row = 1, column = 1)
+
+root.mainloop()
+
 
